@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/assets/private/home/home.css" />
+</head>
+
+<body>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <h1 class="logo">PAT</h1>
+                <p class="logo-subtitle">Painel administrativo</p>
+            </div>
+
+            <nav class="menu">
+                <a href="/home" class="menu-item active">Dashboard</a>
+                <a href="#" class="menu-item">Usuários</a>
+                <a href="#" class="menu-item">Relatórios</a>
+                <a href="#" class="menu-item">Financeiro</a>
+                <a href="#" class="menu-item">Configurações</a>
+            </nav>
+
+            <form method="post" action="/logout">
+                <div class="sidebar-bottom">
+                    <button class="logout-btn" type="submit">Sair</button>
+                </div>
+            </form>
+        </aside>
+
+        <main class="content">
+            <header class="topbar">
+                <div>
+                    <h2>Dashboard</h2>
+                    <p class="topbar-subtitle">Bem-vindo ao painel principal do sistema.</p>
+                </div>
+
+                <div class="profile-box">
+                    <div class="profile-avatar">A</div>
+                    <div>
+                        <strong>Admin</strong>
+                        <p>Administrador</p>
+                    </div>
+                </div>
+            </header>
+
+            <section class="cards">
+                <article class="card">
+                    <span class="card-title">Usuários ativos</span>
+                    <strong class="card-value">128</strong>
+                    <p class="card-description">+12 nas últimas 24 horas</p>
+                </article>
+
+                <article class="card">
+                    <span class="card-title">Pedidos hoje</span>
+                    <strong class="card-value">54</strong>
+                    <p class="card-description">+8% em relação a ontem</p>
+                </article>
+
+                <article class="card">
+                    <span class="card-title">Faturamento</span>
+                    <strong class="card-value">R$ 12.480</strong>
+                    <p class="card-description">Meta mensal: 68%</p>
+                </article>
+
+                <article class="card">
+                    <span class="card-title">Alertas</span>
+                    <strong class="card-value">3</strong>
+                    <p class="card-description">2 críticos e 1 moderado</p>
+                </article>
+            </section>
+
+            <section class="grid">
+                <article class="panel">
+                    <div class="panel-header">
+                        <h3>Atividades recentes</h3>
+                    </div>
+
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div>
+                                <strong>Novo usuário cadastrado</strong>
+                                <p>Lucas Turatti</p>
+                            </div>
+                            <span class="tag success">Concluído</span>
+                        </div>
+
+                        <div class="activity-item">
+                            <div>
+                                <strong>Pedido aprovado</strong>
+                                <p>#10482 processado com sucesso</p>
+                            </div>
+                            <span class="tag info">Em análise</span>
+                        </div>
+
+                        <div class="activity-item">
+                            <div>
+                                <strong>Falha de integração</strong>
+                                <p>Timeout no serviço externo</p>
+                            </div>
+                            <span class="tag danger">Urgente</span>
+                        </div>
+
+                        <div class="activity-item">
+                            <div>
+                                <strong>Backup concluído</strong>
+                                <p>Servidor principal sincronizado</p>
+                            </div>
+                            <span class="tag success">OK</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="panel">
+                    <div class="panel-header">
+                        <h3>Resumo rápido</h3>
+                    </div>
+
+                    <div class="summary-box">
+                        <div class="summary-row">
+                            <span>Conversão</span>
+                            <strong>4.8%</strong>
+                        </div>
+                        <div class="summary-row">
+                            <span>Ticket médio</span>
+                            <strong>R$ 231,10</strong>
+                        </div>
+                        <div class="summary-row">
+                            <span>Clientes novos</span>
+                            <strong>19</strong>
+                        </div>
+                        <div class="summary-row">
+                            <span>Chamados abertos</span>
+                            <strong>7</strong>
+                        </div>
+                    </div>
+                </article>
+            </section>
+
+            <section class="panel table-panel">
+                <div class="panel-header">
+                    <h3>Últimos registros</h3>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Status</th>
+                                <th>Data</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#1001</td>
+                                <td>Pedido A</td>
+                                <td><span class="tag success">Pago</span></td>
+                                <td>17/04/2026</td>
+                                <td>R$ 320,00</td>
+                            </tr>
+                            <tr>
+                                <td>#1002</td>
+                                <td>Pedido B</td>
+                                <td><span class="tag warning">Pendente</span></td>
+                                <td>17/04/2026</td>
+                                <td>R$ 145,90</td>
+                            </tr>
+                            <tr>
+                                <td>#1003</td>
+                                <td>Pedido C</td>
+                                <td><span class="tag danger">Cancelado</span></td>
+                                <td>16/04/2026</td>
+                                <td>R$ 89,50</td>
+                            </tr>
+                            <tr>
+                                <td>#1004</td>
+                                <td>Pedido D</td>
+                                <td><span class="tag success">Pago</span></td>
+                                <td>16/04/2026</td>
+                                <td>R$ 590,00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

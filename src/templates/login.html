@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="/assets/public/login/login.css" />
+</head>
+
+<body>
+    <main class="login-page">
+        <section class="login-card">
+            <div class="login-header">
+                <h1>Entrar</h1>
+                <p>Informe seu usuário e sua senha para continuar.</p>
+            </div>
+
+            <form method="POST" action="/login" class="login-form" id="login-form" autocomplete="on">
+                <div class="form-group">
+                    <label for="username">Usuário</label>
+                    <input type="text" id="username" name="username" placeholder="Digite seu usuário" required
+                        minlength="3" maxlength="100" autocomplete="username" />
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="password" placeholder="Digite sua senha" required
+                        minlength="6" maxlength="200" autocomplete="current-password" />
+                </div>
+
+                <button type="submit">Entrar</button>
+            </form>
+        </section>
+    </main>
+    <script>
+        const form = document.querySelector("#login-form");
+
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+
+            const response = await fetch("/login", {
+                method: "POST",
+                body: formData,
+            });
+
+            if (response.status === 401) {
+                alert("Credenciais inválidas!");
+                return;
+            }
+
+            if (response.ok) {
+                window.location.href = "/home";
+                return;
+            }
+
+            alert("Erro inesperado ao tentar fazer login.");
+        });
+    </script>
+</body>
+
+</html>

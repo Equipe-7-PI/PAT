@@ -41,16 +41,22 @@ O desenvolvimento seguirá uma abordagem **incremental**, acompanhando os semest
 # 2. Requisitos
 
 ## • Requisitos funcionais
-(Escreva os requisitos funcionais da aplicação (funcionalidades esperadas, necessidades que devem ser atendidas))
+* O sistema deve permitir que o usuário realize login.
+* O sistema deve permitir o envio de arquivos XLSX.
+* O sistema deve extrair automaticamente os dados contidos nas planilhas enviadas.
+* O sistema deve exibir os dados processados em formato de gráficos.
+* O sistema deve exibir indicadores numéricos com base nos dados importados.
+* O sistema deve permitir aplicar filtros aos dados exibidos.
+* O sistema deve permitir exportar os resultados processados.
+* O sistema deve exibir os resultados na mesma tela de envio, sem redirecionamento.
 
 ## • Requisitos não funcionais
-(Escreva os requisitos não funcionais da aplicação (qualidade))  
-- Requisitos de produto  
-- Requisitos de organização  
-- Requisitos de confiabilidade  
-- Requisito de implementação  
-- Requisito de padrões  
-- Requisitos de interoperabilidade  
+* O sistema deve possuir interface simples e objetiva.
+* O sistema deve seguir fluxo fixo e intuitivo: Login → Excel → Resultado.
+* O sistema deve ser executado em ambiente interno da Prefeitura.
+* O sistema deve utilizar banco de dados mínimo, apenas para usuários.
+* O sistema deve processar os arquivos com rapidez suficiente para exibição imediata dos resultados na mesma tela.
+* O sistema não precisa de controle avançado de permissões, apenas autenticação de entrada.
 
 # 3. Modelo de casos de uso
 

@@ -1,0 +1,202 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+
+    /* Impede a página ter barra de rolagem */
+    overflow: hidden;
+
+    /* Reduz o efeito de "puxar" a tela no mobile */
+    overscroll-behavior: none;
+}
+
+body {
+    /* Define a imagem de fundo */
+    background-image: url('/assets/public/login/img/BackgroundPrefeitura.webp');
+
+    /* Faz a imagem cobrir toda a área sem distorcer*/
+    background-size: cover;
+
+    /* Centraliza a imagem */
+    background-position: center;
+
+    /* Impede que a imagem se repita */
+    background-repeat: no-repeat;
+
+    /* Mantém a imagem fixa ao rolar a página */
+    background-attachment: fixed;
+
+    /* Define a fonte para toda a página */
+    font-family: Arial, sans-serif;
+}
+
+.login-page {
+    min-height: 100vh;
+    /* Garante que a página ocupe toda a altura da tela */
+    display: flex;
+    justify-content: center;
+    /* Centraliza horizontalmente */
+    align-items: center;
+    /* Centraliza verticalmente */
+}
+
+.login-card {
+    width: min(90vw, 616px);
+    /* Responsivo: 90% da largura da tela ou 420px, o que for menor */
+    min-height: min(600px, calc(100vh - 32px));
+    /* Responsivo: mínimo 600px ou altura da tela menos 32px, o que for menor */
+    padding: clamp(24px, 5vw, 40px);
+    /* Padding responsivo: mínimo 24px, máximo 40px, baseado na largura da tela */
+    background: white;
+    border-radius: 16px;
+}
+
+.logo-area {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.logo {
+    width: clamp(120px, 32%, 192px);
+    /* Responsivo: mínimo 120px, máximo 192px, baseado na largura da tela */
+    height: auto;
+    display: block;
+}
+
+.login-card h1 {
+    margin: 0;
+    text-align: center;
+    font-size: 24px;
+    color: #0057A0;
+}
+
+.login-card h2 {
+    margin: 8px 0 20px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    color: #555;
+}
+
+.login-card hr {
+    border: 0;
+    border-top: 1px solid #C2C2C2;
+}
+
+.login-card form {
+    width: 100%;
+}
+
+.login-form {
+    width: min(100%, 430px);
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 28px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+}
+
+.input-box {
+    position: relative;
+    width: 100%;
+}
+
+.input-box input {
+    width: 100%;
+    height: 48px;
+    border: 1px solid #c9c9c9;
+    border-radius: 12px;
+    padding: 0 48px;
+    font-size: 16px;
+    color: #333;
+    outline: none;
+}
+
+.input-box input::placeholder {
+    color: #bdbdbd;
+}
+
+.input-box input:focus {
+    border-color: #0b70bd;
+}
+
+.input-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.password-eye {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+.login-button {
+    width: 100%;
+    height: 58px;
+    margin-top: 16px;
+
+    border: 0;
+    border-radius: 10px;
+    background: #0b70bd;
+
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background: #075fa3;
+}
+
+.forgot-password {
+    margin-top: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    color: #0072d6;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.forgot-password span {
+    font-size: 22px;
+    line-height: 1;
+}

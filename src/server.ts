@@ -5,6 +5,7 @@ import { homeRoute } from "./routes/home.route";
 import { authRoute } from "./routes/auth.routes";
 
 Bun.serve({
+    hostname: "0.0.0.0",
     port: 3000, //? Roda na porta 3000 (Mas pode ser qualquer uma)
     routes: {
         //? Aqui ele "puxa" todas as rotas importadas
@@ -30,3 +31,4 @@ Bun.serve({
 
 console.log("Servidor ON!");
 console.log("http://localhost:3000");
+console.log("http://127.0.0.1:3000");

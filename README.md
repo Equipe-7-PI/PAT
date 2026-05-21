@@ -8,15 +8,12 @@
 - [2. Requisitos](#2-requisitos)
   - [Requisitos funcionais](#-requisitos-funcionais)
   - [Requisitos não funcionais](#-requisitos-não-funcionais)
-- [3. Modelo de casos de uso](#3-modelo-de-casos-de-uso)
-- [4. Modelo do banco de dados](#4-modelo-do-banco-de-dados)
-- [5. Banco de dados](#5-banco-de-dados)
-- [6. Diagrama de classes](#6-diagrama-de-classes)
-- [7. Estudo de viabilidade](#7-estudo-de-viabilidade)
-- [8. Regras de negócio (Modelo canvas)](#8-regras-de-negócio-modelo-canvas)
-- [9. Design](#9-design)
-- [10. Protótipo](#10-protótipo)
-- [11. Aplicação](#11-aplicação)
+- [3. Modelo do banco de dados](#3-modelo-do-banco-de-dados)
+- [4. Estudo de viabilidade](#4-estudo-de-viabilidade)
+- [5. Regras de negócio (Modelo canvas)](#5-regras-de-negócio-modelo-canvas)
+- [6. Design](#6-design)
+- [7. Protótipo](#7-protótipo)
+- [8. Aplicação](#8-aplicação)
 
 </details>
 
@@ -58,23 +55,17 @@ O desenvolvimento seguirá uma abordagem **incremental**, acompanhando os semest
 * O sistema deve processar os arquivos com rapidez suficiente para exibição imediata dos resultados na mesma tela.
 * O sistema não precisa de controle avançado de permissões, apenas autenticação de entrada.
 
-# 3. Modelo de casos de uso
+# 3. Modelo do banco de dados
+(Modelo conceitual)
 
-# 4. Modelo do banco de dados
-(Modelo conceitual, Modelo lógico, Físico)
+# 4. Estudo de viabilidade
 
-# 5. Banco de dados
+# 5. Regras de negócio (Modelo canvas)
 
-# 6. Diagrama de classes
+# 6.  Design
+(Paleta de cor, Tipografia, Logo, Wireframes, Modelo de Navegação)
 
-# 7. Estudo de viabilidade
-
-# 8. Regras de negócio (Modelo canvas)
-
-# 9. Design
-(Paleta de cor, Tipografia, Logo, Wireframes, Modelo de navegação)
-
-# 10. Protótipo
+# 7.  Protótipo
 (Gere um protótipo funcional na ferramenta que se sentir mais confortável (Figma, por exemplo) e apresente aqui, indicando o link).
 
-# 11. Aplicação
+# 8. Aplicação

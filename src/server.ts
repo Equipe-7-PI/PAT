@@ -18,10 +18,12 @@ Bun.serve({
         const pathname = url.pathname;
 
         //? Faz com que redirecione automaticamente para home se for "/" e o usuário estiver autenticado
-        if (pathname === "/") { 
+        if (pathname === "/") {
             const auth = requireAuth(req);
             if (auth.ok) return redirect("/home");
             return redirect("/login");
+        } else if (pathname === "/teapot") {
+            return new Response("I'm a teapot", { status: 418 });
         }
 
         //? Se não bater em nenhuma rota em "routes: {}" ele cai no 404

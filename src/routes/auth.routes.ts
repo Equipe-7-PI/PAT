@@ -23,7 +23,7 @@ export const authRoute: Routes = {
             const password = String(form.get("password") ?? "");
 
             const credenciaisValidas = //TODO ISSO AQUI É SÓ PRA TESTE NÃO VAI FICAR PARA PRODUÇÃO
-                username === "admin" && password === "1234567890";
+                username === "fatec" && password === "fatec";
 
             if (!credenciaisValidas) return new Response("Credenciais Inválidas!", { status: 401 });
 

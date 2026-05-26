@@ -200,3 +200,11 @@ body {
     font-size: 22px;
     line-height: 1;
 }
+
+.visible {
+    display: block;
+}
+
+.unvisible {
+    display: none;
+}

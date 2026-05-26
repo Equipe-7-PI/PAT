@@ -201,6 +201,7 @@ Com base nas análises realizadas, o **Sistema de Análise de Planilhas para Pre
 Recomenda-se o desenvolvimento do sistema, com foco inicial em um **MVP (produto mínimo viável)** para validação interna.
 
 # 5. Regras de negócio (Modelo canvas)
+<img width="1304" height="436" alt="image" src="https://github.com/user-attachments/assets/f3c4fae3-d559-4128-83b3-b46ca9561c31"/>
 
 # 6.  Design
 (Paleta de cor, Tipografia, Logo, Wireframes, Modelo de Navegação)

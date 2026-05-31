@@ -60,7 +60,148 @@ O desenvolvimento seguirá uma abordagem **incremental**, acompanhando os semest
 
 # 4. Estudo de viabilidade
 
+> **Sistema de Análise de Planilhas para Prefeitura/PAT**
+
+## 4.1 Introdução
+
+O projeto compreende um sistema interno para o Posto de Atendimento ao Trabalhador (PAT), associado à Prefeitura Municipal de Jaú, que deverá receber planilhas (em formato `.xlsx`), extrair dados de forma automática e apresentar os resultados em gráficos, indicadores numéricos, filtros e exportação.
+
+O objetivo é substituir o método de análise manual e limitado por um processo automatizado, intuitivo e visual, seguindo o fluxo:
+
+**Login → Envio das planilhas → Exibição do resultado**
+
+## 4.2 Descrição do Projeto
+
+O projeto consiste no desenvolvimento de uma aplicação digital voltada para análise automatizada de dados provenientes de planilhas utilizadas internamente pela Prefeitura/PAT.
+
+### Problema a ser resolvido
+
+Atualmente, a análise de dados é realizada manualmente ou com apoio limitado de ferramentas, o que resulta em:
+
+- Processos lentos
+- Maior chance de erro humano
+- Dificuldade de visualização de dados
+- Baixa padronização nas análises
+
+### Proposta de solução
+
+- Importação automatizada de arquivos XLSX
+- Processamento e estruturação dos dados
+- Geração de gráficos e indicadores
+- Aplicação de filtros dinâmicos
+- Exportação dos resultados
+
+### Público-alvo
+
+- Funcionários da Prefeitura
+- Analistas de dados do PAT
+- Gestores que necessitam de relatórios rápidos
+
+## 4.3 Viabilidade Técnica
+
+### Tecnologias necessárias
+
+- **Back-end:** TypeScript com Bun
+- **Front-end:** HTML, CSS e JS
+- **Manipulação de planilhas:** Via front-end (JavaScript por parte do cliente)
+- **Banco de dados:** PostgreSQL
+
+### Infraestrutura
+
+- Servidor local disponibilizado pela própria Prefeitura
+- Ambiente controlado (uso interno)
+
+### Riscos técnicos
+
+- Inconsistência nos formatos das planilhas
+- Volume elevado de dados
+- Necessidade de padronização prévia
+
+> **Conclusão técnica:** O projeto é tecnicamente viável, com riscos controláveis.
+
+## 4.4 Viabilidade Econômica
+
+### Custos iniciais
+
+- **Desenvolvimento:** baixo
+- **Infraestrutura:** moderado
+
+### Custos operacionais
+
+- Manutenção do sistema (quando necessário)
+- Atualizações (quando necessário)
+- Suporte técnico (quando necessário)
+
+### Retorno esperado
+
+Embora não gere lucro direto, o sistema proporciona:
+
+- Redução de tempo de análise
+- Aumento de produtividade
+- Melhor tomada de decisão
+
+> **Conclusão econômica:** O projeto é economicamente viável, com alto retorno indireto.
+
+## 4.5 Viabilidade de Mercado
+
+Como se trata de um sistema interno, não há competição direta de mercado. No entanto, existem soluções similares genéricas (como Excel avançado ou ferramentas de BI) que não são totalmente adaptadas à realidade da Prefeitura.
+
+### Diferencial
+
+- Sistema personalizado
+- Fluxo simplificado
+- Foco em necessidades específicas
+
+> **Conclusão de mercado:** O projeto possui alta relevância interna, mesmo sem atuação comercial.
+
+## 4.6 Viabilidade Operacional
+
+### Estrutura necessária
+
+- 5 desenvolvedores (Front-End, Back-End e Full Stack)
+- Usuários finais já existentes (funcionários)
+
+### Processo de uso
+
+1. Login
+2. Upload da planilha
+3. Visualização dos resultados
+
+> **Conclusão operacional:** O projeto é operacionalmente viável e simples de implementar. O fluxo linear reduz a curva de aprendizado e erros operacionais.
+
+## 4.7 Viabilidade Legal
+
+O sistema deve estar em conformidade com a **Lei Geral de Proteção de Dados (LGPD)**, garantindo:
+
+- Controle de acesso (login)
+- Proteção de dados sensíveis
+- Armazenamento seguro
+
+Por ser um sistema interno, os riscos legais são reduzidos, desde que boas práticas sejam seguidas.
+
+> **Conclusão legal:** O projeto é legalmente viável, com atenção à proteção de dados.
+
+## 4.8 Análise de Riscos
+
+| **Risco** | **Impacto** | **Probabilidade** | **Mitigação** |
+| --- | --- | --- | --- |
+| Planilhas fora do padrão | Alto | Médio | Validação e padronização |
+| Resistência dos usuários | Médio | Médio | Treinamento |
+| Problemas de desempenho | Médio | Baixo | Otimização |
+
+## 4.9 Conclusão Final
+
+Com base nas análises realizadas, o **Sistema de Análise de Planilhas para Prefeitura/PAT** é considerado **viável**, pois apresenta:
+
+- Baixa complexidade técnica
+- Alto ganho operacional
+- Baixo custo de implementação
+- Impacto direto na eficiência do trabalho
+
+Recomenda-se o desenvolvimento do sistema, com foco inicial em um **MVP (produto mínimo viável)** para validação interna.
+
 # 5. Regras de negócio (Modelo canvas)
+<img width="1304" height="436" alt="image" src="https://github.com/user-attachments/assets/f3c4fae3-d559-4128-83b3-b46ca9561c31"/>
 
 # 6.  Design
 (Paleta de cor, Tipografia, Logo, Wireframes, Modelo de Navegação)

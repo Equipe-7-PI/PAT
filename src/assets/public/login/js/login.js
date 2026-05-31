@@ -22,3 +22,20 @@ form.addEventListener("submit", async (event) => {
 
     alert("Erro inesperado ao tentar fazer login.");
 });
+
+const inputPassword = document.querySelector("#password");
+const openEye = document.querySelector("#open-eye");
+const closedEye = document.querySelector("#closed-eye");
+
+function togglePasswordVisibility() {
+    const type = inputPassword.getAttribute("type") === "password" ? "text" : "password";
+    inputPassword.setAttribute("type", type);
+
+    if (inputPassword.getAttribute("type") === "text") {
+        openEye.classList.add("unvisible");
+        closedEye.classList.remove("unvisible");
+    } else {
+        openEye.classList.remove("unvisible");
+        closedEye.classList.add("unvisible");
+    }
+}

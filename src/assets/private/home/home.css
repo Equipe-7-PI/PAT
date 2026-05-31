@@ -32,7 +32,7 @@
 html,
 body {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
 }
 
 body {
@@ -42,6 +42,32 @@ body {
     background: var(--color-bg);
     color: var(--color-text-primary);
     overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* Camada global do drag. Desfoca a pagina inteira para deixar bem claro onde a planilha deve cair. */
+body.upload-page--dragover::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 1040;
+
+    background: rgba(8, 55, 107, 0.22);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+
+    pointer-events: none;
+    animation: uploadPageFadeIn 0.18s ease-out both;
+}
+
+@keyframes uploadPageFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 /* ========================= */
@@ -392,16 +418,83 @@ body {
     min-height: 220px;
     border: 2px dashed var(--color-border);
     border-radius: 6px;
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: clamp(18px, 2.4vh, 32px) 24px;
-    transition: background 0.2s ease, border-color 0.2s ease;
+    transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .upload-dropzone:hover {
     background: rgba(114, 174, 234, 0.04);
+}
+
+/* Quando ja tem arquivo, a tabela vira a dropzone. A borda pontilhada sai de cena, mas a elegancia fica. */
+.upload-dropzone--has-files {
+    border: none;
+    background: transparent;
+    padding: 0;
+    align-items: stretch;
+    justify-content: stretch;
+}
+
+.upload-dropzone--has-files:hover {
+    background: transparent;
+}
+
+/* Quando um arquivo entra na area, a dropzone sobe acima do blur. Chique, mas sem perder a funcao. */
+.upload-dropzone--dragover {
+    z-index: 1050;
+    border-color: var(--color-blue-700);
+    background: rgba(248, 251, 255, 0.96);
+    box-shadow: 0 24px 60px rgba(0, 63, 130, 0.24);
+    transform: translateY(-2px);
+}
+
+/* Apaga o conteudo interno durante o drag. A mensagem precisa ser a estrela, nao a tabela la atras. */
+.upload-dropzone--dragover>* {
+    opacity: 0.18;
+    filter: blur(2px);
+}
+
+/* Overlay visual do drag. Ele passa um pouco da borda para ocupar melhor o espaco e ficar mais bonito. */
+.upload-dropzone--dragover::after {
+    content: "Solte as planilhas aqui";
+    position: absolute;
+    inset: -18px;
+    z-index: 5;
+
+    border: 2px dashed rgba(0, 100, 185, 0.82);
+    border-radius: 12px;
+    background: rgba(248, 251, 255, 0.9);
+    color: var(--color-blue-900);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 800;
+    text-align: center;
+    pointer-events: none;
+    box-shadow: inset 0 0 0 8px rgba(0, 100, 185, 0.045);
+    animation: uploadDropPulse 0.9s ease-in-out infinite alternate;
+}
+
+@keyframes uploadDropPulse {
+    from {
+        opacity: 0.78;
+        transform: scale(0.99);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .upload-dropzone__icon {
@@ -643,4 +736,346 @@ body {
     border: none;
     cursor: pointer;
     width: 100%;
+}
+
+
+/* ========================== */
+/*  Planilhas selecionadas    */
+/* ========================== */
+
+/* Campo que recebe a tabela. Agora ele ocupa tudo, mas sem esmagar as linhas igual sanfona. */
+.upload-dropzone__files {
+    width: 100%;
+    flex: 1;
+    min-height: 220px;
+
+    display: flex;
+    align-items: stretch;
+    justify-content: stretch;
+}
+
+/* Caixa da tabela: ocupa a dropzone inteira e ainda reserva uma area limpa para arrastar mais arquivos. */
+.upload-files-table-wrapper {
+    --upload-type-column: 96px;
+    --upload-size-column: 120px;
+    --upload-actions-column: 136px;
+
+    width: 100%;
+    min-height: 100%;
+
+    border: 1px solid rgba(114, 174, 234, 0.85);
+    border-radius: 8px;
+    background: var(--color-white);
+    box-shadow: none;
+
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Area restante da dropzone. Ela mostra que a tabela tambem aceita drag and drop sem virar bagunca visual. */
+.upload-files-table-wrapper::after {
+    content: "Arraste mais planilhas aqui";
+    flex: 1;
+    min-height: clamp(96px, 16vh, 160px);
+
+    border-top: 1px solid rgba(0, 63, 130, 0.06);
+    background:
+        linear-gradient(180deg, rgba(248, 251, 255, 0.6) 0%, rgba(255, 255, 255, 0.95) 100%),
+        repeating-linear-gradient(135deg, rgba(114, 174, 234, 0.08) 0 1px, transparent 1px 12px);
+    color: rgba(8, 55, 107, 0.55);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    text-align: center;
+}
+
+/* Cabecalho da lista. Titulo de um lado, adicionar do outro, igual adulto responsavel. */
+.upload-files-table-header {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1fr)
+        var(--upload-type-column)
+        var(--upload-size-column)
+        var(--upload-actions-column);
+    align-items: center;
+    column-gap: 0;
+
+    min-height: 58px;
+    padding: 12px 16px;
+    background: linear-gradient(180deg, #f8fbff 0%, #eef6fd 100%);
+    border-bottom: 1px solid rgba(114, 174, 234, 0.55);
+}
+
+.upload-files-table-header strong {
+    color: var(--color-text-primary);
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+/* Acoes da tabela. Dois botoes no mesmo canto para nao sair cacando espaco pela tela. */
+.upload-files-table-actions {
+    grid-column: 2 / 5;
+    display: grid;
+    grid-template-columns: calc(var(--upload-type-column) + var(--upload-size-column)) var(--upload-actions-column);
+    align-items: center;
+    justify-content: stretch;
+    gap: 10px;
+}
+
+/* Botao para adicionar mais planilhas. E um label, mas trabalha como botao sem reclamar. */
+.upload-files-add-table {
+    min-height: 38px;
+
+    border: 1px solid var(--color-blue-700);
+    border-radius: 8px;
+    background: var(--color-blue-700);
+    color: var(--color-white);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    padding: 0 14px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    justify-self: center;
+
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.upload-files-add-table:hover {
+    background: #0058a4;
+    border-color: #0058a4;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0, 100, 185, 0.22);
+}
+
+.upload-files-add-table:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.upload-files-add-table:focus-visible {
+    outline: 3px solid rgba(0, 100, 185, 0.22);
+    outline-offset: 3px;
+}
+
+/* Botao de envio. Por enquanto ele so esta bonito ali, esperando a logica chegar de mala e cuia. */
+.upload-files-submit {
+    min-height: 38px;
+
+    border: 1px solid #149548;
+    border-radius: 8px;
+    background: #149548;
+    color: var(--color-white);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 16px;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+    justify-self: center;
+
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.upload-files-submit:hover {
+    background: #0f7d3b;
+    border-color: #0f7d3b;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(20, 149, 72, 0.22);
+}
+
+.upload-files-submit:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.upload-files-submit:focus-visible {
+    outline: 3px solid rgba(20, 149, 72, 0.2);
+    outline-offset: 3px;
+}
+
+/* Tabela propriamente dita. Colapsada para nao parecer planilha importada de 2007. */
+.upload-files-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    flex: 0 0 auto;
+}
+
+.upload-files-table thead {
+    background: var(--color-blue-100);
+}
+
+.upload-files-table th {
+    height: 42px;
+    padding: 0 16px;
+
+    color: var(--color-text-primary);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.upload-files-table th:nth-child(2),
+.upload-files-table th:nth-child(3),
+.upload-files-table th:nth-child(4),
+.upload-files-table td:nth-child(2),
+.upload-files-table td:nth-child(3),
+.upload-files-table td:nth-child(4) {
+    text-align: center;
+}
+
+.upload-files-table th:nth-child(2),
+.upload-files-table td:nth-child(2) {
+    width: var(--upload-type-column);
+}
+
+.upload-files-table th:nth-child(3),
+.upload-files-table td:nth-child(3) {
+    width: var(--upload-size-column);
+}
+
+.upload-files-table th:nth-child(4),
+.upload-files-table td:nth-child(4) {
+    width: var(--upload-actions-column);
+}
+
+.upload-files-table tbody tr {
+    border-top: 1px solid rgba(0, 63, 130, 0.08);
+    transition: background 0.2s ease;
+}
+
+.upload-files-table tbody tr:hover {
+    background: #f8fbff;
+}
+
+.upload-files-table td {
+    height: 52px;
+    padding: 0 16px;
+
+    color: var(--color-text-secondary);
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+/* Nome do arquivo com reticencias, porque alguns nomes parecem testamento. */
+.upload-files-table__name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    color: var(--color-text-primary);
+    font-weight: 600;
+}
+
+/* Badge do tipo do arquivo. Pequeno, verde e util, como toda etiqueta deveria ser. */
+.upload-files-table__type {
+    min-width: 48px;
+    height: 26px;
+
+    border-radius: 6px;
+    background: #149548;
+    color: var(--color-white);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 9px;
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+/* Botao da lixeira: discreto ate precisar virar heroi e remover uma planilha errada. */
+.upload-file-remove {
+    width: 34px;
+    height: 34px;
+
+    border: 1px solid rgba(198, 55, 55, 0.18);
+    border-radius: 8px;
+    background: rgba(198, 55, 55, 0.06);
+    color: #c63737;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+.upload-file-remove:hover {
+    border-color: rgba(198, 55, 55, 0.36);
+    background: #c63737;
+    color: var(--color-white);
+    transform: translateY(-1px);
+}
+
+.upload-file-remove:active {
+    transform: translateY(0);
+}
+
+.upload-file-remove:focus-visible {
+    outline: 3px solid rgba(198, 55, 55, 0.18);
+    outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+    /* No mobile o cabecalho empilha, porque botao espremido e tristeza visual. */
+    .upload-files-table-header {
+        align-items: stretch;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .upload-files-add-table {
+        width: 100%;
+    }
+
+    .upload-files-table-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .upload-files-submit {
+        width: 100%;
+    }
+
+    .upload-files-table-wrapper {
+        max-height: none;
+        overflow-x: auto;
+    }
+
+    .upload-files-table {
+        min-width: 620px;
+    }
+}
+/* ========================== */
+/*   CSS PARA USAR COM O JS   */
+/* ========================== */
+.disable {
+    display: none;
 }

@@ -1,0 +1,549 @@
+/* =============================================
+   PAT - Dashboard
+   Sistema Interno de Gestão - Prefeitura Municipal
+   ============================================= */
+
+/* Fonte e estilos base da página */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #edf1f6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Contêiner principal com layout flexível */
+#tela-principal {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* ==============================
+   SIDEBAR / MENU LATERAL
+   Posicionamento fixo à esquerda com altura total
+   ============================== */
+
+#sidebar {
+    width: 220px;
+    min-height: 100vh;
+    background-color: #0a4390;
+    /* Gradiente vertical para maior profundidade visual */
+    background: linear-gradient(to bottom, #0a4390, #063a81);
+    color: white;
+    padding: 20px 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Área do logotipo */
+#logo-area {
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+#logo-img {
+    width: 80px;
+}
+
+/* Links de navegação do menu */
+.link-menu {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 9px 12px;
+    border-radius: 6px;
+    margin-bottom: 4px;
+    font-size: 15px;
+}
+
+.link-menu:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white; /* Sobrescreve a cor padrão de hover do Bootstrap */
+}
+
+/* Estado ativo do item de menu selecionado */
+.link-menu.ativo {
+    background-color: rgba(255,255,255,0.15);
+}
+
+/* Links secundários no rodapé do menu */
+.link-menu-pequeno {
+    display: block;
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    padding: 7px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    margin-bottom: 2px;
+}
+
+.link-menu-pequeno:hover {
+    background: rgba(255,255,255,0.1);
+    color: white;
+}
+
+/* Caixa de identificação do usuário autenticado */
+#usuario-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.1);
+    padding: 9px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+
+/* ==============================
+   CONTEUDO PRINCIPAL
+   ============================== */
+
+#conteudo {
+    flex: 1;
+    padding: 18px 16px;
+    /* Oculta overflow horizontal para evitar quebra de layout em tabelas extensas */
+    overflow-x: hidden;
+}
+
+
+/* Título principal da página */
+#titulo-pagina {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0a3f86;
+    margin: 0 0 2px;
+}
+
+
+/* ==============================
+   BOTOES
+   Estilos distintos para cada ação
+   ============================== */
+
+/* Botão de exportação de dados */
+#btn-exportar {
+    background: linear-gradient(to bottom, #0061b6, #0052a0);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#btn-exportar:hover {
+    background: #0052a0;
+}
+
+/* Botão de limpeza dos filtros */
+#btn-limpar {
+    background: white;
+    color: #005aa9;
+    border: 1px solid #d0d8e4;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#btn-limpar:hover {
+    background-color: #f0f5ff;
+}
+
+
+/* ==============================
+   FILTROS
+   ============================== */
+
+.filtro-box {
+    background: white;
+    border: 1px solid #d8dfe8;
+    border-radius: 10px;
+    padding: 10px 14px;
+    /* Sombra sutil para separação visual dos demais elementos */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+}
+
+.filtro-box label {
+    font-size: 12px;
+    color: #1f2d3d;
+    display: block;
+}
+
+/* Campos de entrada e seleção dentro dos filtros */
+.filtro-box input,
+.filtro-box select {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 13px;
+    background: transparent;
+    font-family: 'Poppins', sans-serif; /* Aplicação explícita da fonte para consistência */
+}
+
+
+/* ==============================
+   CARDS DE ESTATÍSTICAS
+   ============================== */
+
+.stat-card {
+    background: white;
+    border: 1px solid #d8dfe8;
+    border-radius: 12px;
+    padding: 18px 18px 14px 80px; /* Padding-left amplo para acomodar o ícone absoluto */
+    position: relative;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    min-height: 120px;
+}
+
+/* Ícone circular posicionado no canto esquerdo do card */
+.stat-icone {
+    position: absolute;
+    left: 16px;
+    top: 20px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background-color: #dceafd;
+    color: #005aa9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.stat-texto p {
+    margin: 0 0 4px;
+    font-size: 14px;
+    color: #1f2d3d;
+}
+
+/* Valor numérico principal do card */
+.stat-texto h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #005aa9;
+    margin: 0 0 8px;
+    line-height: 1;
+}
+
+.stat-texto small {
+    font-size: 11px;
+    color: #2b3747;
+}
+
+/* Destaque visual para variação percentual positiva */
+.verde {
+    color: #2e9c4a;
+    font-weight: 600;
+}
+
+/* Ícone de informação posicionado no canto superior direito do card */
+.icone-info {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #8090a4;
+    font-size: 14px;
+}
+
+
+/* ==============================
+   CARDS GENERICOS (gráficos, tabela...)
+   ============================== */
+
+.card-box {
+    background: white;
+    border: 1px solid #d8dfe8;
+    border-radius: 12px;
+    padding: 14px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+    height: 100%; /* Altura total para alinhamento entre colunas da grade */
+}
+
+/* Etiqueta de legenda exibida nos gráficos */
+/* Nota: o acento no nome da classe requer aspas na referência HTML */
+.pílula {
+    border: 1px solid #d6dde8;
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 12px;
+    background: white;
+    color: #444;
+}
+
+
+/* ==============================
+   GRAFICO DE BARRAS
+   Implementação com CSS puro utilizando divs e spans
+   ============================== */
+
+#grafico-barras {
+    display: flex;
+    gap: 8px;
+    height: 160px;
+}
+
+/* Escala numérica do eixo vertical */
+#eixo-y {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #aab;
+    text-align: right;
+    width: 36px;
+    padding-bottom: 4px;
+}
+
+/* Área de plotagem das barras */
+#area-barras {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+    border-left: 1px solid #dde;
+    border-bottom: 1px solid #dde;
+    padding: 6px 6px 0;
+}
+
+/* Estilo individual de cada barra do gráfico */
+#area-barras span {
+    flex: 1;
+    background-color: #005aa9;
+    border-radius: 2px 2px 0 0;
+    /* Cursor padrão para exibição do tooltip com o período */
+    cursor: default;
+}
+
+#area-barras span:hover {
+    background-color: #0a3f86;
+}
+
+/* Rótulos do eixo horizontal */
+#eixo-x {
+    display: flex;
+    justify-content: space-around;
+    font-size: 9px;
+    color: #2b3747;
+    margin-top: 4px;
+    padding-left: 44px; /* Alinhamento com a área de barras */
+}
+
+
+/* ==============================
+   GRAFICO DE PIZZA (ROSCA)
+   Construído com conic-gradient e posicionamento absoluto
+   ============================== */
+
+#pizza-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    /* Em telas estreitas, os elementos se reorganizam verticalmente */
+    flex-wrap: wrap;
+}
+
+#pizza-grafico {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    /* Cada segmento do gradiente corresponde à proporção de cada categoria */
+    background: conic-gradient(
+        #1f54be 0% 34.2%,
+        #3f7ce3 34.2% 58.9%,
+        #78a8f1 58.9% 75.2%,
+        #afccf8 75.2% 87.3%,
+        #d0e0fb 87.3% 94.7%,
+        #edf2fb 94.7% 100%
+    );
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* Elemento central que transforma o gráfico de pizza em rosca */
+#pizza-buraco {
+    position: absolute;
+    top: 35px;
+    left: 35px;
+    right: 35px;
+    bottom: 35px;
+    border-radius: 50%;
+    background: white;
+}
+
+/* Legenda do gráfico de rosca */
+#pizza-legenda {
+    flex: 1;
+    min-width: 140px;
+}
+
+.legenda-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    margin-bottom: 7px;
+    color: #203246;
+}
+
+.legenda-item span {
+    flex: 1;
+}
+
+/* Marcadores coloridos da legenda */
+.bolinha {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+/* Paleta de cores para identificação das categorias */
+.cor1 { background-color: #173c9a; }
+.cor2 { background-color: #245fc5; }
+.cor3 { background-color: #6f9fef; }
+.cor4 { background-color: #a7c8f6; }
+.cor5 { background-color: #c6daf8; }
+
+
+/* ==============================
+   TABELA
+   Estilização aplicada sobre os componentes nativos do Bootstrap
+   ============================== */
+
+#dashboardTable th {
+    color: #005aa9;
+    font-size: 11px;
+}
+
+#dashboardTable td {
+    font-size: 11px;
+}
+
+/* Link de acesso à listagem completa */
+#ver-todos {
+    color: #005aa9;
+    font-size: 13px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+#ver-todos:hover {
+    text-decoration: underline;
+}
+
+
+/* ==============================
+   BARRAS DO SETOR
+   ============================== */
+
+#barras-setor {
+    margin-bottom: 14px;
+}
+
+/* Barra horizontal individual por setor */
+.barra-linha {
+    height: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    background-color: #bcd4f5; /* Cor padrão de fallback */
+}
+
+/* Larguras e cores distintas por setor, simulando a distribuição de dados */
+.barra-cor1 { width: 84%; background-color: #1f54be; }
+.barra-cor2 { width: 68%; background-color: #2b6ed8; }
+.barra-cor3 { width: 52%; background-color: #78a8f1; }
+.barra-cor4 { width: 34%; background-color: #afccf8; }
+
+/* Lista de setores com legenda visual */
+#lista-setores {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 13px;
+}
+
+#lista-setores li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+
+/* ==============================
+   RESPONSIVIDADE MOBILE
+   Ajustes de layout para viewports inferiores a 768px
+   ============================== */
+
+@media (max-width: 768px) {
+
+    /* Em dispositivos móveis, o menu é reposicionado acima do conteúdo */
+    #tela-principal {
+        flex-direction: column;
+    }
+
+    #sidebar {
+        width: 100%;
+        min-height: auto;
+        padding: 14px;
+    }
+
+    /* Navegação horizontal com rolagem em telas estreitas */
+    #menu-links {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 4px;
+        margin-top: 12px !important;
+    }
+
+    .link-menu {
+        white-space: nowrap;
+        font-size: 13px;
+        padding: 7px 10px;
+    }
+
+    /* Rodapé do menu ocultado para economizar espaço em mobile */
+    #menu-rodape {
+        display: none;
+    }
+
+    /* Cabeçalho reorganizado em coluna no mobile */
+    #cabecalho {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    #btn-exportar {
+        width: 100%;
+    }
+
+    /* Gráfico de rosca centralizado em telas pequenas */
+    #pizza-wrap {
+        justify-content: center;
+    }
+
+    #pizza-grafico {
+        width: 120px;
+        height: 120px;
+    }
+
+    #pizza-buraco {
+        top: 28px; left: 28px; right: 28px; bottom: 28px;
+    }
+
+    /* Altura reduzida do gráfico de barras em mobile */
+    #grafico-barras {
+        height: 120px;
+    }
+
+    #eixo-x {
+        font-size: 8px;
+    }
+
+}

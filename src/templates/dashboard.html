@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Configuração de viewport para compatibilidade com dispositivos móveis -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAT - Dashboard</title>
+
+    <!-- Bootstrap CSS - framework de estilização e componentes -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons - biblioteca de ícones vetoriais -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Fonte Poppins via Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="src\assets\private\dashboard\dashboard.css">
+    <link rel="icon" type="image/webp" href="src\assets\public\img\BrasaoJahu.webp">
+</head>
+
+<body>
+
+    <!-- Contêiner principal da aplicação -->
+    <div id="tela-principal">
+
+        <!-- ============ MENU LATERAL ============ -->
+        <div id="sidebar">
+
+            <!-- Área de logotipo e identificação do sistema -->
+            <div id="logo-area" class="text-center">
+                <img src="src\assets\public\img\BrasaoJahu.webp" alt="Brasão Jahu" id="logo-img">
+                <p class="text-white fw-bold mt-2 mb-0">PREFEITURA</p>
+                <p class="text-white" style="font-size: 12px;">Posto de Atendimento<br>ao Trabalhador</p>
+            </div>
+
+            <!-- Links de navegação principal -->
+            <!-- Estrutura baseada em div para maior controle de estilização -->
+            <div id="menu-links" class="mt-4">
+                <a href="#" class="link-menu ativo">
+                    <i class="bi bi-speedometer2"></i> Dashboard
+                </a>
+                <a href="#" class="link-menu">
+                    <i class="bi bi-card-list"></i> Solicitações
+                </a>
+                <a href="#" class="link-menu">
+                    <i class="bi bi-file-earmark-text"></i> Relatórios
+                </a>
+                <a href="#" class="link-menu">
+                    <i class="bi bi-people"></i> Usuários
+                </a>
+            </div>
+
+            <!-- Links secundários no rodapé do menu lateral -->
+            <div id="menu-rodape">
+                <a href="#" class="link-menu-pequeno"><i class="bi bi-gear"></i> Configurações</a>
+                <a href="#" class="link-menu-pequeno"><i class="bi bi-question-circle"></i> Ajuda</a>
+                <a href="#" class="link-menu-pequeno"><i class="bi bi-box-arrow-right"></i> Sair</a>
+
+                <!-- Exibição do usuário autenticado -->
+                <div id="usuario-box" class="mt-3">
+                    <i class="bi bi-person-circle" style="font-size: 20px;"></i>
+                    <span>Usuário Default</span>
+                </div>
+            </div>
+
+        </div>
+        <!-- Fim: menu lateral -->
+
+
+        <!-- ============ CONTEUDO PRINCIPAL ============ -->
+        <div id="conteudo">
+
+            <!-- Cabeçalho da página com título e ações -->
+            <div id="cabecalho" class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                    <h1 id="titulo-pagina">Dashboard</h1>
+                    <p class="text-muted mb-0" style="font-size: 13px;">Visão geral das solicitações</p>
+                </div>
+                <!-- Botão de exportação de dados -->
+                <button id="btn-exportar" onclick="exportar()">
+                    <i class="bi bi-file-earmark-arrow-down"></i> Exportar PDF/XLSX
+                </button>
+            </div>
+
+
+            <!-- ======= AREA DE FILTROS ======= -->
+            <!-- Grade responsiva utilizando sistema de colunas do Bootstrap -->
+            <div id="area-filtros" class="row g-2 mb-3">
+
+                <div class="col-12 col-md-4">
+                    <div class="filtro-box">
+                        <label for="startDate"><b>Período</b></label>
+                        <div class="d-flex gap-2 mt-1">
+                            <input type="date" id="startDate" value="2024-05-01">
+                            <input type="date" id="endDate" value="2025-01-01">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-3">
+                    <div class="filtro-box">
+                        <label for="categoryFilter"><b>Categoria</b></label>
+                        <select id="categoryFilter" class="mt-1">
+                            <option value="all">Todas</option>
+                            <option value="intermediacao">Intermediação de mão de obra</option>
+                            <option value="seguro">Seguro-Desemprego</option>
+                            <option value="qualificacao">Qualificação Profissional</option>
+                            <option value="documentos">Emissão de Documentos</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-3">
+                    <div class="filtro-box">
+                        <label for="sectorFilter"><b>Setor</b></label>
+                        <select id="sectorFilter" class="mt-1">
+                            <option value="all">Todos</option>
+                            <option value="orientacao">Orientação</option>
+                            <option value="administracao">Administração</option>
+                            <option value="qualificacao">Qualificação</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-2 d-flex align-items-end">
+                    <button id="btn-limpar" onclick="limparFiltros()" class="w-100">
+                        <i class="bi bi-arrow-clockwise"></i> Limpar
+                    </button>
+                </div>
+
+            </div>
+            <!-- Fim: área de filtros -->
+
+
+            <!-- ======= CARDS DE ESTATISTICAS ======= -->
+            <!-- Grade responsiva para exibição dos indicadores principais -->
+            <div class="row g-3 mb-3">
+
+                <div class="col-12 col-md-4">
+                    <div class="stat-card">
+                        <div class="stat-icone">
+                            <i class="bi bi-clipboard-data"></i>
+                        </div>
+                        <div class="stat-texto">
+                            <p>Total de Registros</p>
+                            <h2 id="totalCount">0</h2>
+                            <!-- Variação percentual em relação ao período anterior -->
+                            <small><span class="verde">12,5%</span> em relação ao período anterior</small>
+                        </div>
+                        <i class="bi bi-info-circle icone-info"></i>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="stat-card">
+                        <div class="stat-icone">
+                            <i class="bi bi-stopwatch"></i>
+                        </div>
+                        <div class="stat-texto">
+                            <p>Média de Processamento</p>
+                            <h2 id="avgProcessing">0 Dias</h2>
+                            <small><span class="verde">8,06%</span> em relação ao período anterior</small>
+                        </div>
+                        <i class="bi bi-info-circle icone-info"></i>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="stat-card">
+                        <div class="stat-icone">
+                            <i class="bi bi-patch-check"></i>
+                        </div>
+                        <div class="stat-texto">
+                            <p>Taxa de Conclusão</p>
+                            <h2 id="completionRate">0%</h2>
+                            <small><span class="verde">5,35%</span> em relação ao período anterior</small>
+                        </div>
+                        <i class="bi bi-info-circle icone-info"></i>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Fim: cards de estatísticas -->
+
+
+            <!-- ======= GRAFICOS ======= -->
+            <div class="row g-3 mb-3">
+
+                <!-- Gráfico de barras - evolução mensal de atendimentos -->
+                <div class="col-12 col-lg-7">
+                    <div class="card-box">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="mb-0" style="color: #005aa9;">Evolução de atendimentos</h5>
+                            <span class="pílula">Total de atendimentos</span>
+                        </div>
+
+                        <!-- Gráfico de barras construído via HTML e CSS -->
+                        <div id="grafico-barras">
+                            <div id="eixo-y">
+                                <!-- Valores de referência do eixo vertical -->
+                                <span>3 000</span>
+                                <span>2 500</span>
+                                <span>2 000</span>
+                                <span>1 500</span>
+                                <span>1 000</span>
+                                <span>500</span>
+                                <span>0</span>
+                            </div>
+                            <div id="area-barras">
+                                <!-- Cada elemento span representa uma barra; a altura é proporcional ao valor do período -->
+                                <span style="height: 32%;" title="Abr/24"></span>
+                                <span style="height: 78%;" title="Mai/24"></span>
+                                <span style="height: 46%;" title="Jun/24"></span>
+                                <span style="height: 52%;" title="Jul/24"></span>
+                                <span style="height: 58%;" title="Ago/24"></span>
+                                <span style="height: 41%;" title="Set/24"></span>
+                                <span style="height: 68%;" title="Out/24"></span>
+                                <span style="height: 49%;" title="Nov/24"></span>
+                                <span style="height: 37%;" title="Dez/24"></span>
+                                <span style="height: 56%;" title="Jan/25"></span>
+                            </div>
+                        </div>
+
+                        <!-- Rótulos do eixo horizontal -->
+                        <div id="eixo-x">
+                            <span>Abr/24</span><span>Mai/24</span><span>Jun/24</span><span>Jul/24</span>
+                            <span>Ago/24</span><span>Set/24</span><span>Out/24</span><span>Nov/24</span>
+                            <span>Dez/24</span><span>Jan/25</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráfico de rosca - distribuição por tipo de solicitação -->
+                <div class="col-12 col-lg-5">
+                    <div class="card-box">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="mb-0" style="color: #005aa9;">Tipos de solicitação</h5>
+                            <span class="pílula">Porcentagem (%)</span>
+                        </div>
+
+                        <div id="pizza-wrap">
+                            <!-- Gráfico de rosca implementado com conic-gradient via CSS -->
+                            <div id="pizza-grafico">
+                                <div id="pizza-buraco"></div>
+                            </div>
+
+                            <!-- Legenda do gráfico de rosca -->
+                            <div id="pizza-legenda">
+                                <div class="legenda-item">
+                                    <i class="bolinha cor1"></i>
+                                    <span>Intermediação de mão de obra</span>
+                                    <b>34,2%</b>
+                                </div>
+                                <div class="legenda-item">
+                                    <i class="bolinha cor2"></i>
+                                    <span>Seguro-Desemprego</span>
+                                    <b>24,7%</b>
+                                </div>
+                                <div class="legenda-item">
+                                    <i class="bolinha cor3"></i>
+                                    <span>Qualificação Profissional</span>
+                                    <b>16,3%</b>
+                                </div>
+                                <div class="legenda-item">
+                                    <i class="bolinha cor4"></i>
+                                    <span>Emissão de Documentos</span>
+                                    <b>12,1%</b>
+                                </div>
+                                <div class="legenda-item">
+                                    <i class="bolinha cor5"></i>
+                                    <span>Outros</span>
+                                    <b>5,3%</b>
+                                </div>
+                                <p style="text-align: right; color: #005aa9; margin-top: 6px; font-size: 13px;">
+                                    Total: <b>8.700</b>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Fim: gráficos -->
+
+
+            <!-- ======= TABELA E RESUMO POR SETOR ======= -->
+            <div class="row g-3 mb-3">
+
+                <!-- Tabela de atendimentos recentes -->
+                <div class="col-12 col-lg-8">
+                    <div class="card-box">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <div>
+                                <h5 class="mb-0" style="color: #005aa9;">Atendimentos recentes</h5>
+                                <p style="font-size: 12px; color: #507090; margin: 0;">Visão rápida dos últimos
+                                    registros</p>
+                            </div>
+                            <a href="#" id="ver-todos" onclick="verTodos(event)">Ver todos os atendimentos</a>
+                        </div>
+
+                        <!-- Tabela responsiva utilizando classes do Bootstrap -->
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-sm" id="dashboardTable">
+                                <thead>
+                                    <tr>
+                                        <th>Protocolo</th>
+                                        <th>Data/Hora</th>
+                                        <th>Solicitante</th>
+                                        <th>Tipo de Solicitação</th>
+                                        <th>Setor</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+
+                        <!-- Mensagem exibida quando nenhum registro é encontrado -->
+                        <div id="sem-dados" class="text-center text-muted p-3"
+                            style="display:none; border: 1px dashed #ccc; border-radius: 8px;">
+                            Nenhum atendimento encontrado com os filtros aplicados.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resumo de atendimentos por setor -->
+                <div class="col-12 col-lg-4">
+                    <div class="card-box">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <h5 class="mb-0" style="color: #005aa9;">Atendimentos por setor</h5>
+                                <p style="font-size: 12px; color: #507090; margin:0;">Total de atendimentos</p>
+                            </div>
+                            <span id="sectorTotal" style="font-weight: bold; color: #005aa9;">0</span>
+                        </div>
+
+                        <!-- Barras horizontais proporcionais por setor -->
+                        <div id="barras-setor">
+                            <div class="barra-linha barra-cor1"></div>
+                            <div class="barra-linha barra-cor2"></div>
+                            <div class="barra-linha barra-cor3"></div>
+                            <div class="barra-linha barra-cor4"></div>
+                        </div>
+
+                        <!-- Legenda identificadora dos setores -->
+                        <ul id="lista-setores">
+                            <li><i class="bolinha cor1"></i> Intermediação</li>
+                            <li><i class="bolinha cor2"></i> Seguro-Desemprego</li>
+                            <li><i class="bolinha cor3"></i> Qualificação</li>
+                            <li><i class="bolinha cor4"></i> Orientação</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Fim: tabela e resumo por setor -->
+
+            <!-- Rodapé da aplicação -->
+            <div class="text-center text-muted mt-2 mb-3" style="font-size: 12px;">
+                PAT - Prefeitura Municipal, Sistema Interno de Gestão
+            </div>
+
+        </div>
+        <!-- Fim: conteúdo principal -->
+
+    </div>
+    <!-- Fim: contêiner principal -->
+
+
+    <!-- Bootstrap JS - carregado ao final do documento conforme recomendação oficial -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src=""></script>
+
+</body>
+</html>

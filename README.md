@@ -248,9 +248,52 @@ Com base nas análises realizadas, o **Sistema de Análise de Planilhas para Pre
 
 Recomenda-se o desenvolvimento do sistema, com foco inicial em um **MVP (produto mínimo viável)** para validação interna.
 
-# 5. Regras de negócio (Modelo canvas)
-<img width="1304" height="436" alt="image" src="https://github.com/user-attachments/assets/f3c4fae3-d559-4128-83b3-b46ca9561c31"/>
+# 5. Regras de negócio (Modelo Canvas)
 
+O Modelo Canvas foi utilizado para representar, de forma visual e resumida, os principais elementos de negócio envolvidos no projeto. Ele auxilia na identificação do público-alvo, proposta de valor, canais de atendimento, relacionamento com o cliente, recursos necessários, atividades principais, parceiros envolvidos, estrutura de custos e possíveis fontes de renda.
+
+<img width="5000" height="2250" alt="modelo_negocios_canvas_prefeitura_pat" src="https://github.com/user-attachments/assets/63d33f04-bd8b-4d80-b9a3-ebc92884372b" />
+
+## 5.1 Descrição do modelo
+
+O projeto tem como foco apoiar o atendimento e a organização das informações relacionadas ao PAT, oferecendo uma solução que facilite o acesso aos dados necessários pelos funcionários responsáveis.
+
+A proposta de valor está relacionada à otimização do acesso às informações, reduzindo dificuldades operacionais e tornando o processo de consulta mais simples e eficiente.
+
+## 5.2 Elementos do Canvas
+
+| Elemento | Descrição |
+|---|---|
+| Segmento de mercado | Empresas relacionadas ao ramo de vagas de emprego. |
+| Proposta de valor | Facilitar o acesso às informações necessárias para os funcionários do PAT. |
+| Canais | Contato por meio de WhatsApp e telefone fixo. |
+| Relacionamento com o cliente | Atendimento à prefeitura, com possibilidade de manutenção periódica, verificação da disponibilidade da aplicação e correção de eventuais problemas. |
+| Fontes de renda | Não há fonte de renda prevista para o projeto neste momento. |
+| Recursos-chave | Infraestrutura, computadores adequados para desenvolvimento e integrantes da equipe capacitados. |
+| Atividades-chave | Desenvolvimento da lógica da plataforma, desenvolvimento do front-end e integração com banco de dados. |
+| Parceiros-chave | Fatec, professores e facilitadores. |
+| Estrutura de custos | Hora-homem dos integrantes da equipe e infraestrutura da Fatec Jaú. |
+
+## 5.3 Regras de negócio identificadas
+
+Com base no Modelo Canvas, foram identificadas as seguintes regras de negócio:
+
+| Código | Regra de negócio |
+|---|---|
+| RN01 | O sistema deve facilitar o acesso dos funcionários do PAT às informações necessárias para suas atividades. |
+| RN02 | O sistema deve ser desenvolvido considerando a prefeitura como cliente principal do projeto. |
+| RN03 | O sistema deve permitir manutenção e correções futuras, caso sejam identificados problemas após a implantação. |
+| RN04 | O contato com o cliente poderá ocorrer por meio de WhatsApp ou telefone fixo. |
+| RN05 | O projeto não possui fonte de renda prevista neste momento, por se tratar de uma solução acadêmica/institucional. |
+| RN06 | O desenvolvimento depende da infraestrutura disponível, dos computadores utilizados e da equipe responsável pelo projeto. |
+| RN07 | O sistema deve contemplar desenvolvimento da lógica da aplicação, interface front-end e integração com banco de dados. |
+| RN08 | A Fatec, professores e facilitadores atuam como parceiros de apoio ao desenvolvimento do projeto. |
+
+## 5.4 Observações
+
+O Modelo Canvas apresentado tem como objetivo apoiar a compreensão estratégica do projeto, não representando diretamente a estrutura técnica do sistema. Ele serve como base para identificar necessidades, limitações, envolvidos e possíveis decisões relacionadas ao desenvolvimento da solução.
+
+As regras de negócio descritas a partir do Canvas poderão ser ajustadas conforme novas necessidades forem identificadas durante o desenvolvimento ou validação com o cliente.
 # 6.  Design
 (Paleta de cor, Tipografia, Logo, Wireframes, Modelo de Navegação)
 

@@ -3,6 +3,7 @@ import { requireAuth } from "./functions/session";
 import { assetsRoutes } from "./routes/assets.routes";
 import { homeRoute } from "./routes/home.route";
 import { authRoute } from "./routes/auth.routes";
+import { dashboardRoute } from "./routes/dashboard.routes";
 
 Bun.serve({
     hostname: "0.0.0.0",
@@ -11,7 +12,8 @@ Bun.serve({
         //? Aqui ele "puxa" todas as rotas importadas
         ...assetsRoutes,
         ...authRoute,
-        ...homeRoute
+        ...homeRoute,
+        ...dashboardRoute
     },
     fetch(req: Request) {
         const url = new URL(req.url);

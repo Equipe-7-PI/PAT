@@ -56,7 +56,55 @@ O desenvolvimento seguirá uma abordagem **incremental**, acompanhando os semest
 * O sistema não precisa de controle avançado de permissões, apenas autenticação de entrada.
 
 # 3. Modelo do banco de dados
-(Modelo conceitual)
+## Modelo conceitual
+
+O modelo conceitual do banco de dados descreve as principais entidades do sistema, seus atributos e a forma como esses elementos representam as informações manipuladas pela aplicação.
+
+Neste momento, o modelo apresenta a entidade **USUARIO**, responsável por armazenar os dados relacionados aos usuários cadastrados no sistema, incluindo informações de identificação, autenticação, controle de acesso, status da conta e registros de auditoria.
+
+---
+
+## Entidade: USUARIO
+<img width="1227" height="529" alt="image" src="https://github.com/user-attachments/assets/a6f89666-85e0-4117-b30f-fe676544b4d6" />
+
+A entidade **USUARIO** representa uma pessoa ou conta autorizada a acessar o sistema. Ela concentra os dados necessários para autenticação, identificação do usuário, controle de permissões e acompanhamento de atividades básicas, como criação, atualização e último acesso.
+
+### Atributos da entidade
+
+| Campo | Descrição |
+|---|---|
+| `id` | Identificador único do usuário. Atua como chave primária da entidade, garantindo que cada registro seja individualmente reconhecido no banco de dados. |
+| `hash_password` | Armazena a senha do usuário em formato de hash. Por segurança, a senha nunca deve ser salva em texto puro. |
+| `created_at` | Registra a data e hora em que o usuário foi criado no sistema. |
+| `user` | Representa o nome de usuário, login ou identificador utilizado para acesso ao sistema. |
+| `updated_at` | Registra a data e hora da última alteração feita nos dados do usuário. |
+| `nome` | Armazena o primeiro nome do usuário. |
+| `sobrenome` | Armazena o sobrenome do usuário. |
+| `active` | Indica se o usuário está ativo ou inativo no sistema. Pode ser utilizado para permitir ou bloquear o acesso sem remover o registro do banco de dados. |
+| `role` | Campo adicionado como possível melhoria futura para controle de permissões. Na versão atual, todos os usuários utilizarão o valor padrão `1`, representando acesso geral. Caso futuramente seja necessário diferenciar perfis de acesso, a estrutura já estará preparada. |
+| `last_login_at` | Registra a data e hora do último login realizado pelo usuário. Pode ser um campo opcional, pois usuários recém-criados podem ainda não ter acessado o sistema. |
+
+---
+
+## Regras e observações
+
+O campo `id` é utilizado como identificador principal da entidade **USUARIO** e deve ser único para cada registro.
+
+O campo `hash_password` deve armazenar somente o resultado do processo de criptografia/hash da senha, seguindo boas práticas de segurança e evitando o armazenamento de senhas em texto puro.
+
+Os campos `created_at` e `updated_at` auxiliam no controle de auditoria, permitindo identificar quando o registro foi criado e quando sofreu sua última alteração.
+
+O campo `active` permite controlar o acesso do usuário sem a necessidade de excluir seus dados do banco. Dessa forma, é possível desativar temporariamente uma conta mantendo seu histórico preservado.
+
+O campo `role` foi adicionado como uma possível melhoria futura para controle de permissões por perfil de usuário. Na versão atual do sistema, todos os usuários utilizarão o valor padrão `1`, representando acesso geral. Caso não haja necessidade de diferentes níveis de permissão, o campo continuará utilizando apenas esse valor sem impactar o funcionamento geral da aplicação.
+
+O campo `last_login_at` pode permanecer vazio até que o usuário realize seu primeiro acesso.
+
+---
+
+## Resumo
+
+A entidade **USUARIO** centraliza os dados necessários para gerenciamento de acesso ao sistema. Ela permite identificar usuários, validar autenticação, controlar permissões, verificar o status da conta e manter registros básicos de criação, atualização e último login.
 
 # 4. Estudo de viabilidade
 

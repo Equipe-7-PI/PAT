@@ -294,10 +294,175 @@ Com base no Modelo Canvas, foram identificadas as seguintes regras de negócio:
 O Modelo Canvas apresentado tem como objetivo apoiar a compreensão estratégica do projeto, não representando diretamente a estrutura técnica do sistema. Ele serve como base para identificar necessidades, limitações, envolvidos e possíveis decisões relacionadas ao desenvolvimento da solução.
 
 As regras de negócio descritas a partir do Canvas poderão ser ajustadas conforme novas necessidades forem identificadas durante o desenvolvimento ou validação com o cliente.
-# 6.  Design
-(Paleta de cor, Tipografia, Logo, Wireframes, Modelo de Navegação)
+# 6. Design
 
-# 7.  Protótipo
-(Gere um protótipo funcional na ferramenta que se sentir mais confortável (Figma, por exemplo) e apresente aqui, indicando o link).
+## 6.1 Identidade Visual
+
+### Conceito e Diretrizes
+
+A identidade visual do Sistema PAT foi construída sobre três pilares: **institucionalidade**, **clareza** e **modernidade**. Por tratar-se de um sistema público municipal, a linguagem visual transmite confiança, seriedade e acessibilidade — valores essenciais em plataformas de governo.
+
+O design adota estilo minimalista, com hierarquia visual clara, espaços generosos e uso estratégico do azul — cor institucional da Prefeitura de Jaú, amplamente associada à credibilidade, tecnologia e governança pública.
+
+### Logo e Marca
+
+A marca é composta por três elementos integrados:
+
+- **Brasão oficial da Prefeitura Municipal de Jaú** — âncora institucional, garante reconhecimento imediato
+- **Sigla "PAT"** em tipografia sans-serif Bold, caixa alta — moderna e objetiva
+- **Descritivo "Posto de Atendimento ao Trabalhador"** em fonte menor — completa a hierarquia textual
+
+Essa composição aparece na sidebar do sistema, posicionada no topo, garantindo presença constante da marca durante toda a navegação.
+
+**Versões de aplicação:**
+
+| Versão | Descrição |
+|---|---|
+| Principal | Brasão colorido + texto branco — sobre fundo azul escuro (sidebar) |
+| Positiva | Brasão + texto azul escuro — sobre fundos claros (documentos, relatórios) |
+| Reduzida | Apenas o brasão — para favicon, app mobile ou espaços reduzidos |
+
+**Restrições de uso:**
+- Não distorcer, recolorir ou recortar nenhum elemento da marca
+- Área de proteção mínima: equivalente à altura da letra "P" da sigla PAT em todas as direções
+- Não aplicar efeitos de sombra, gradiente ou contorno sobre o logo
+
+---
+
+## 6.2 Paleta de Cores
+
+A paleta foi definida com base na identidade da Prefeitura de Jaú. O azul é a cor primária, funcionando como elo entre a marca institucional e a interface digital. As cores funcionais (verde, laranja, vermelho) são usadas exclusivamente para comunicar estados do sistema.
+
+| Amostra | Nome | HEX | RGB | Uso Principal |
+|---|---|---|---|---|
+| 🟦 | Azul Sidebar | `#01387F` | rgb(1, 56, 127) | Fundo da navegação lateral |
+| 🔵 | Azul Primário | `#1565C0` | rgb(21, 101, 192) | Botões CTA, ênfase máxima |
+| 🟣 | Azul Foco | `#073572` | rgb(7, 53, 114) | Texto principal |
+| ⬜ | Cinza Médio | `#607D8B` | rgb(96, 125, 139) | Texto secundário, labels |
+| ⬜ | Branco Acinzentado | `#ECEFF1` | rgb(236, 239, 241) | Bordas, separadores, linhas alternadas |
+| ⬜ | Branco | `#F1F1F1` | rgb(241, 241, 241) | Fundo base, superfícies |
+| 🟢 | Verde | `#2C9D32` | rgb(44, 157, 50) | Status Concluído / sucesso |
+| 🟠 | Laranja | `#FF7B00` | rgb(255, 123, 0) | Status Pendente / alerta |
+| 🔴 | Vermelho | `#C41C1C` | rgb(196, 28, 28) | Erro / ação destrutiva |
+
+**Regras de aplicação:**
+- `#01387F` — exclusivo para o fundo da sidebar; nunca usado em outros elementos
+- `#1565C0` — botão principal "Exportar PDF/XLSX", indicadores ativos, ênfase máxima
+- Cores funcionais (verde, laranja, vermelho) — apenas para badges de status; nunca decorativamente
+
+---
+
+## 6.3 Tipografia
+
+O sistema utiliza **Inter** como fonte principal — desenvolvida especialmente para interfaces digitais, com excelente legibilidade em tamanhos pequenos. Para valores numéricos em tabelas e campos de protocolo, utiliza-se **Roboto Mono**, garantindo alinhamento perfeito em colunas de dados.
+
+| Elemento | Fonte | Peso | Cor |
+|---|---|---|---|
+| Título da Página | Inter | Bold | `#1565C0` |
+| Título de Seção | Inter | SemiBold | `#1565C0` |
+| Label / Subtítulo | Inter | Medium | `#263238` |
+| Corpo / Conteúdo | Inter | Regular | `#263238` |
+| Texto Secundário | Inter | Regular | `#607D8B` |
+| Botão Principal | Inter | SemiBold | `#FFFFFF` |
+| Destaque | Inter | Bold | `#263238` |
+| Valor de Gráfico | Inter | Regular | `#607D8B` |
+| Protocolo / ID | Roboto Mono | Regular | `#263238` |
+| Caption / Legenda | Inter | Regular | `#607D8B` |
+
+---
+
+## 6.4 Interface Desktop
+
+### Estrutura de Layout
+
+A interface desktop adota layout de duas colunas fixas: sidebar de navegação à esquerda (**243px**, fundo `#01387F`) e área de conteúdo principal à direita, com fundo branco e padding de 24px. A área de conteúdo utiliza grid interno de 12 colunas com gutter de 20px.
+
+- **Sidebar (243px):** logo no topo, menu principal ao centro, utilitários no rodapé
+- **Header do conteúdo:** título da página + subtítulo descritivo + botão de exportação
+- **Filtros globais:** Período (date picker), Categoria (dropdown) e Setor (dropdown)
+- **Área de KPIs:** 3 cards em linha, ocupando 100% da largura
+- **Área de gráficos:** 2 colunas — gráfico de barras (60%) e pizza (40%)
+- **Tabela de atendimentos recentes** e gráfico de barras horizontais por setor
+
+### Telas Desenvolvidas
+
+#### Tela de Login
+
+Tela de entrada com fundo fotográfico do Paço Municipal de Jaú. À esquerda, apresentação do sistema com os diferenciais (Seguro, Confiável, Eficiente) e o fluxo de uso em três etapas (Login → Excel → Resultados). À direita, card central com brasão da Prefeitura, campos de usuário e senha, e botão "Entrar".
+
+#### Tela de Upload
+
+Tela de envio de arquivos com sidebar simplificada (itens: Upload e Análise). Área principal com dropzone para arrastar planilhas `.xlsx` ou `.csv`, botão "Selecionar Arquivo" e informações de segurança e limites de tamanho (até 50MB). O fluxo é guiado por etapas numeradas: 1. Upload → 2. Análise.
+
+#### Dashboard Principal
+
+Tela central do sistema, reunindo todos os indicadores de desempenho em uma única visão. A hierarquia visual conduz o olhar do gestor: **filtros → KPIs → gráficos analíticos → tabela de recentes**.
+
+**Componentes presentes:**
+- Cards de KPI (Total de Registros, Média de Processamento, Taxa de Conclusão)
+- Gráfico de barras vertical — Atendimentos por Mês
+- Gráfico de pizza — Tipos de Solicitação
+- Tabela de Atendimentos Recentes
+- Gráfico de barras horizontais — Atendimentos por Setor
+
+#### Sidebar de Navegação
+
+A navegação lateral é fixa e permanente em todas as telas. Estrutura:
+
+- **Topo:** logo PAT com brasão da Prefeitura de Jaú e descritivo do sistema
+- **Menu principal:** Dashboard · Atendimentos · Solicitações · Candidatos · Empresas · Vagas · Relatórios · Usuários · Configurações
+- **Rodapé:** Ajuda · Sair
+
+Item ativo é destacado com fundo semitransparente mais claro e ícone/texto brancos. Item hover recebe fundo sutil para feedback visual imediato.
+
+---
+
+## 6.5 Padrões de Componentes UI
+
+### Botões
+
+| Tipo | Estilo |
+|---|---|
+| Primário | Fundo `#1565C0`, texto branco, border-radius 6px, altura 40px, ícone opcional à esquerda |
+| Secundário | Fundo branco, borda `#1565C0`, texto `#1565C0` — para ações secundárias |
+| Link | Texto `#1E88E5`, sem fundo — ex: "Ver todos os atendimentos →" |
+| Destrutivo | Fundo `#C62828`, texto branco — exclusivo para ações irreversíveis com confirmação |
+
+### Cards de KPI
+
+- Fundo branco com sombra suave: `box-shadow: 0 2px 8px rgba(0,0,0,0.08)`
+- Ícone circular à esquerda: fundo `#E3F2FD`, ícone em azul secundário
+- Valor principal: 28px Bold — máxima hierarquia visual
+- Variação percentual: verde (↑) para positivo, laranja/vermelho (↓) para negativo
+- Ícone ⓘ no canto superior direito — tooltip com detalhes
+
+### Tabelas de Dados
+
+- Cabeçalho: fundo `#E3F2FD`, texto `#1E88E5` Bold, altura 44px
+- Linhas: alternância branco / `#F8FBFF` para facilitar leitura em longas listagens
+- Status com badges coloridos: "Concluído" (verde), "Pendente" (laranja), "Em Andamento" (azul)
+- Colunas numéricas (protocolo, data) em Roboto Mono
+
+### Filtros e Campos
+
+- Date picker com ícone de calendário, formato `dd/mm/aaaa – dd/mm/aaaa`
+- Dropdowns com borda `#ECEFF1`, chevron à direita, opção "Todos" como default
+- Botão "Limpar filtros" em estilo link, com ícone de refresh — posicionado à direita dos filtros
+
+### Gráficos
+
+- Paleta: variações de azul (`#1565C0`, `#1E88E5`, `#42A5F5`, `#90CAF9`, `#BBDEFB`) para manter coesão
+- Gráfico de pizza: 6 segmentos com legenda lateral, total exibido centralizado no anel
+- Gráfico de barras vertical: eixo Y com gridlines sutis (`#ECEFF1`), sem borda de eixo
+- Gráfico de barras horizontal: barras em `#1E88E5`, fundo branco, labels à esquerda
+- Todos os gráficos possuem dropdown para alternar entre métricas (ex: Total / Porcentagem)
+
+# 7. Protótipo
+
+O protótipo funcional foi desenvolvido no Figma, seguindo as diretrizes documentadas no planejamento de design — paleta de cores, tipografia, componentes UI e estrutura de layout.
+
+Ele contempla as três telas principais do sistema: **Login**, **Upload de Planilhas** e **Dashboard**, navegáveis de forma interativa.
+
+🔗 [Acessar protótipo no Figma](https://www.figma.com/design/ZZRdzNGB8vgid1ftVsOAIB/PAT---Prot%C3%B3tipo?node-id=0-1&t=rgjo9S2z6Z6iV4uh-1)
 
 # 8. Aplicação

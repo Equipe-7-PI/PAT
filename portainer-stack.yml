@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  projeto-interdisciplinar-pat:
+    image: 127.0.0.1:5000/pat:latest
+    environment:
+      NODE_ENV: production
+    networks:
+      - OracleGeneralNetwork
+    healthcheck:
+      test: ["CMD-SHELL", "bun -e \"const r = await fetch('http://127.0.0.1:3000/login'); if (!r.ok) process.exit(1);\""]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      labels:
+        - traefik.enable=true
+        - traefik.docker.network=OracleGeneralNetwork
+
+        - traefik.http.routers.projeto-interdisciplinar-pat.rule=Host(`projeto-interdisciplinar-pat.kelbyte.com.br`)
+        - traefik.http.routers.projeto-interdisciplinar-pat.entrypoints=websecure
+        - traefik.http.routers.projeto-interdisciplinar-pat.tls=true
+        - traefik.http.routers.projeto-interdisciplinar-pat.tls.certresolver=letsencrypt
+
+        - traefik.http.services.projeto-interdisciplinar-pat.loadbalancer.server.port=3000
+
+networks:
+  OracleGeneralNetwork:
+    external: true

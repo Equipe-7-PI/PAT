@@ -25,12 +25,12 @@ Este projeto tem como objetivo desenvolver um **sistema interno para a Prefeitur
 O sistema será de uso **exclusivo da Prefeitura** e terá fluxo simples e objetivo, sempre seguindo a sequência principal de uso: **Login → Envio das planilhas → Exibição do resultado**. A ideia é estimular o usuário a seguir esse caminho único, reduzindo complexidade e mantendo a experiência direta.
 
 ## • Objetivos
-* Permitir login de usuários da Prefeitura. ✅
-* Receber planilhas XLSX para processamento. ⌛
-* Extrair automaticamente os dados enviados. ⌛
-* Exibir os resultados em gráficos e números. ⌛
-* Permitir filtros sobre os dados processados. ⌛
-* Disponibilizar exportação das informações exibidas. ⌛
+* Permitir login de usuários da Prefeitura. 
+* Receber planilhas XLSX para processamento. 
+* Extrair automaticamente os dados enviados. 
+* Exibir os resultados em gráficos e números. 
+* Permitir filtros sobre os dados processados. 
+* Disponibilizar exportação das informações exibidas. 
 
 ## • Metodologia
 O desenvolvimento seguirá uma abordagem **incremental**, acompanhando os semestres do PI. O protótipo inicial será centrado em três elementos principais: **login, envio de arquivos XLSX e visualização gráfica dos resultados**.

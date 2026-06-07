@@ -1,6 +1,6 @@
 <p align="left" style="font-size:28px;"><strong><em>Documentação do PI</em></strong></p>
 <details>
-  <summary><strong>📑 Sumário</strong></summary>
+  <summary><strong> Sumário</strong></summary>
 
 - [1. Introdução](#1-introdução)
   - [Objetivos](#-objetivos)

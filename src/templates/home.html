@@ -11,6 +11,7 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
+    <link rel="stylesheet" href="/assets/private/global/global.css" />
     <link rel="stylesheet" href="/assets/private/home/home.css" />
     <link rel="icon" type="image/webp" href="/assets/public/img/BrasaoJahu.webp">
 </head>
@@ -388,9 +389,279 @@
                     </div>
                 </div>
             </section>
+
+            <!--
+                O JS clona este template depois que o POST de upload devolve
+                o processId. Assim, o visual pode ser ajustado sem misturar
+                a marcacao da tela com a logica do EventSource.
+            -->
+            <template id="processing-template">
+                <section class="processing-panel" aria-labelledby="processing-title">
+                    <header class="processing-panel__header">
+                        <div>
+                            <h2 id="processing-title">Analisando planilhas</h2>
+                            <p id="processing-description">
+                                Estamos validando os arquivos e consultando os dados das empresas.
+                            </p>
+                        </div>
+
+                        <strong id="processing-percent" class="processing-panel__percent">0%</strong>
+                    </header>
+
+                    <div
+                        id="processing-progress"
+                        class="processing-progress"
+                        role="progressbar"
+                        aria-label="Progresso da consulta de CNPJs"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-valuenow="0"
+                    >
+                        <span id="processing-progress-fill" class="processing-progress__fill"></span>
+                    </div>
+
+                    <p id="processing-count" class="processing-panel__count" aria-live="polite">
+                        0 de 0 CNPJs consultados
+                    </p>
+
+                    <aside id="processing-notice" class="processing-notice" aria-live="polite">
+                        <span class="processing-notice__icon" aria-hidden="true">
+                            <i class="bi bi-info-circle"></i>
+                        </span>
+
+                        <div>
+                            <strong id="processing-current-message">
+                                Preparando a consulta dos CNPJs...
+                            </strong>
+                            <p>Não feche esta aba enquanto o processamento estiver em andamento.</p>
+                        </div>
+                    </aside>
+
+                    <section class="processing-cnpj-panel" aria-labelledby="processing-cnpj-title">
+                        <header class="processing-cnpj-panel__header">
+                            <div>
+                                <h3 id="processing-cnpj-title">CNPJs identificados</h3>
+                                <p>Acompanhe abaixo o resultado de cada consulta.</p>
+                            </div>
+
+                            <span class="processing-cnpj-panel__legend">
+                                <i class="bi bi-arrow-down" aria-hidden="true"></i>
+                                Rolagem
+                            </span>
+                        </header>
+
+                        <div class="processing-cnpj-panel__scroll">
+                            <ul id="processing-cnpj-list" class="processing-cnpj-list" aria-live="polite"></ul>
+                        </div>
+                    </section>
+
+                    <button id="processing-retry" class="processing-retry disable" type="button">
+                        Voltar ao upload
+                    </button>
+                </section>
+            </template>
+
+            <template id="dashboard-template">
+                <section class="dashboard-panel" aria-labelledby="dashboard-title">
+                    <button id="dashboard-back-upload" class="dashboard-back-button" type="button">
+                        <i class="bi bi-arrow-left" aria-hidden="true"></i>
+                        Voltar
+                    </button>
+
+                    <header class="dashboard-header">
+                        <div>
+                            <span class="dashboard-eyebrow">Resultado da análise</span>
+                            <h2 id="dashboard-title">Dashboard PAT</h2>
+                            <p id="dashboard-subtitle">
+                                Visão geral das vagas, empregadores, CNAEs e situações informadas nas planilhas.
+                            </p>
+                        </div>
+
+                        <div class="dashboard-actions">
+                            <button id="dashboard-export-csv" class="dashboard-button" type="button">
+                                <i class="bi bi-file-earmark-spreadsheet" aria-hidden="true"></i>
+                                Exportar como planilha
+                            </button>
+                        </div>
+                    </header>
+
+                    <aside class="dashboard-data-note" aria-label="Qualidade dos dados">
+                        <i class="bi bi-shield-check" aria-hidden="true"></i>
+                        <p>
+                            Todos os registros importados entram nos cálculos. Campos ausentes na planilha permanecem
+                            como "Não informado" ou "Não aplicável".
+                        </p>
+                    </aside>
+
+                    <details class="dashboard-filter-panel">
+                        <summary class="dashboard-filter-toggle">
+                            <span>
+                                <i class="bi bi-funnel" aria-hidden="true"></i>
+                                Filtro
+                            </span>
+                            <i class="bi bi-chevron-down" aria-hidden="true"></i>
+                        </summary>
+
+                        <section class="dashboard-filters" aria-label="Filtros do dashboard">
+                            <label class="dashboard-field">
+                                <span>Início</span>
+                                <input id="dashboard-start-period" type="month">
+                            </label>
+
+                            <label class="dashboard-field">
+                                <span>Fim</span>
+                                <input id="dashboard-end-period" type="month">
+                            </label>
+
+                            <label class="dashboard-field">
+                                <span>Setor</span>
+                                <select id="dashboard-sector-filter"></select>
+                            </label>
+
+                            <label class="dashboard-field">
+                                <span>Status</span>
+                                <select id="dashboard-status-filter">
+                                    <option value="all">Todos</option>
+                                    <option value="ABERTA">Aberta</option>
+                                    <option value="PREENCHIDA_PAT">Preenchida pelo PAT</option>
+                                    <option value="PREENCHIDA_FORA">Preenchida por outras fontes</option>
+                                    <option value="CANCELADA">Cancelada</option>
+                                    <option value="SUSPENSA">Suspensa</option>
+                                    <option value="EXPIRADA">Expirada</option>
+                                    <option value="DESCONHECIDO">Desconhecido</option>
+                                </select>
+                            </label>
+
+                            <label class="dashboard-field">
+                                <span>Tipo</span>
+                                <select id="dashboard-document-filter">
+                                    <option value="all">CNPJ e CPF</option>
+                                    <option value="CNPJ">Somente CNPJ</option>
+                                    <option value="CPF">Somente CPF</option>
+                                </select>
+                            </label>
+
+                            <label class="dashboard-field dashboard-field--search">
+                                <span>Busca</span>
+                                <input id="dashboard-search" type="search" placeholder="Empresa, ocupação, CNPJ ou código">
+                            </label>
+
+                            <button id="dashboard-clear-filters" class="dashboard-button dashboard-button--soft" type="button">
+                                <i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i>
+                                Limpar
+                            </button>
+                        </section>
+                    </details>
+
+                    <section id="dashboard-kpis" class="dashboard-kpis" aria-label="Indicadores principais"></section>
+
+                    <section class="dashboard-grid dashboard-grid--wide">
+                        <article class="dashboard-card">
+                            <header class="dashboard-card__header">
+                                <div>
+                                    <h3>Evolução mensal</h3>
+                                    <p>Postos solicitados por período importado.</p>
+                                </div>
+                                <span class="dashboard-badge">Postos</span>
+                            </header>
+                            <div id="dashboard-monthly-chart" class="dashboard-monthly-chart"></div>
+                        </article>
+
+                        <article class="dashboard-card">
+                            <header class="dashboard-card__header">
+                                <div>
+                                    <h3>Status das vagas</h3>
+                                    <p>Situação informada na planilha.</p>
+                                </div>
+                                <span class="dashboard-badge">Postos</span>
+                            </header>
+                            <div id="dashboard-status-chart" class="dashboard-bar-list"></div>
+                        </article>
+                    </section>
+
+                    <section class="dashboard-grid">
+                        <article class="dashboard-card">
+                            <header class="dashboard-card__header">
+                                <div>
+                                    <h3>Demanda por setor</h3>
+                                    <p>CPF fica separado como pessoa física, sem CNAE.</p>
+                                </div>
+                                <span class="dashboard-badge">CNAE</span>
+                            </header>
+                            <div id="dashboard-sector-chart" class="dashboard-bar-list"></div>
+                        </article>
+
+                        <article class="dashboard-card">
+                            <header class="dashboard-card__header">
+                                <div>
+                                    <h3>Situação de encerramento</h3>
+                                    <p>Sem inferir motivo real quando a planilha não informa.</p>
+                                </div>
+                                <span class="dashboard-badge dashboard-badge--warning">Leitura</span>
+                            </header>
+                            <div id="dashboard-reason-list" class="dashboard-reason-list"></div>
+                        </article>
+                    </section>
+
+                    <section class="dashboard-grid">
+                        <article class="dashboard-card">
+                            <header class="dashboard-card__header">
+                                <div>
+                                    <h3>Ranking de solicitantes</h3>
+                                    <p>Empregadores com maior volume de postos solicitados.</p>
+                                </div>
+                            </header>
+                            <div id="dashboard-employer-ranking" class="dashboard-ranking"></div>
+                        </article>
+
+                        <article class="dashboard-card">
+                            <header class="dashboard-card__header">
+                                <div>
+                                    <h3>Ranking de ocupações</h3>
+                                    <p>Cargos com maior demanda no período filtrado.</p>
+                                </div>
+                            </header>
+                            <div id="dashboard-occupation-ranking" class="dashboard-ranking"></div>
+                        </article>
+                    </section>
+
+                    <section class="dashboard-card dashboard-card--table">
+                        <header class="dashboard-card__header">
+                            <div>
+                                <h3>Base detalhada</h3>
+                                <p>Cada linha representa um código de vaga importado.</p>
+                            </div>
+                            <strong id="dashboard-table-count" class="dashboard-table-count">0 registros</strong>
+                        </header>
+
+                        <div class="dashboard-table-wrapper">
+                            <table class="dashboard-table">
+                                <thead>
+                                    <tr>
+                                        <th>Período</th>
+                                        <th>Solicitante</th>
+                                        <th>Ocupação</th>
+                                        <th>Setor</th>
+                                        <th>Status</th>
+                                        <th>Postos</th>
+                                        <th>Vencimento</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dashboard-vacancies-table"></tbody>
+                            </table>
+                        </div>
+
+                        <div id="dashboard-empty-state" class="dashboard-empty-state disable">
+                            Nenhuma vaga encontrada com os filtros aplicados.
+                        </div>
+                    </section>
+                </section>
+            </template>
         </main>
     </div>
 
+    <script src="/assets/private/vendor/xlsx.full.min.js"></script>
+    <script src="/assets/private/home/spreadsheet-validator.js"></script>
     <script src="/assets/private/home/home.js"></script>
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

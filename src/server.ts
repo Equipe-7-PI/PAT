@@ -4,6 +4,7 @@ import { assetsRoutes } from "./routes/assets.routes";
 import { homeRoute } from "./routes/home.route";
 import { authRoute } from "./routes/auth.routes";
 import { dashboardRoute } from "./routes/dashboard.routes";
+import { uploadRoute } from "./routes/upload.routes";
 
 Bun.serve({
     hostname: "0.0.0.0",
@@ -11,6 +12,7 @@ Bun.serve({
     routes: {
         //? Aqui ele "puxa" todas as rotas importadas
         ...assetsRoutes,
+        ...uploadRoute,
         ...authRoute,
         ...homeRoute,
         ...dashboardRoute

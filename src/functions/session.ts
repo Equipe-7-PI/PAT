@@ -1,4 +1,4 @@
-import type { SessionUser } from "../types/session.types";
+import type { AuthResult, SessionUser } from "../types/session.types";
 import { redirect } from "./redirect";
 
 function parseCookies(cookieHeader: string | null): Record<string, string> {
@@ -34,7 +34,7 @@ function getSessionFromRequest(req: Request): SessionUser | null {
     return null;
 }
 
-export function requireAuth(req: Request) {
+export function requireAuth(req: Request): AuthResult {
     const session = getSessionFromRequest(req);
     if (!session) return { ok: false, response: redirect("/login") };
     return { ok: true, session };

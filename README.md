@@ -1,6 +1,12 @@
 <p align="left" style="font-size:28px;"><strong><em>Documentação do PI</em></strong></p>
 <details>
   <summary><strong> Sumário</strong></summary>
+  Grupo 6 
+- Kelvin Mattos
+- Heitor Botelho
+- Olavo Tofaneto
+- Octávio Hypolito
+- Guilherme Viana
 
 - [1. Introdução](#1-introdução)
   - [Objetivos](#-objetivos)

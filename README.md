@@ -2,7 +2,6 @@
 <details>
   <summary><strong> Sumário</strong></summary>
   <br>Grupo 6<br>
-- Kelvin Kauan Melo Mattos<br>
 - Heitor Ometto Botelho<br>
 - Olavo Cespedes Tofaneto<br>
 - Octávio H. Hypolito<br>

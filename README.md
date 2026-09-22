@@ -44,22 +44,32 @@ O desenvolvimento seguirá uma abordagem **incremental**, acompanhando os semest
 # 2. Requisitos
 
 ## • Requisitos funcionais
-* O sistema deve permitir que o usuário realize login.
-* O sistema deve permitir o envio de arquivos XLSX.
-* O sistema deve extrair automaticamente os dados contidos nas planilhas enviadas.
-* O sistema deve exibir os dados processados em formato de gráficos.
-* O sistema deve exibir indicadores numéricos com base nos dados importados.
-* O sistema deve permitir aplicar filtros aos dados exibidos.
-* O sistema deve permitir exportar os resultados processados.
-* O sistema deve exibir os resultados na mesma tela de envio, sem redirecionamento.
+* RF01 - O sistema deve permitir que o usuário realize login.
+* RF02 - O sistema deve permitir o envio de arquivos XLSX.
+* RF03 - O sistema deve extrair automaticamente os dados contidos nas planilhas enviadas.
+* RF04 - O sistema deve exibir os dados processados em formato de gráficos.
+* RF05 - O sistema deve exibir indicadores numéricos com base nos dados importados.
+* RF06 - O sistema deve permitir aplicar filtros aos dados exibidos.
+* RF07 - O sistema deve permitir exportar os resultados processados.
+* RF08 - O sistema deve exibir os resultados na mesma tela de envio, sem redirecionamento.
+* RF09 - O sistema deve permitir o cadastro de novos usuários apenas por usuários administradores.
+* RF10 - O sistema deve armazenar o histórico dos dados extraídos em um banco de dados.
+* RF11 - O sistema deve permitir a filtração de históricos de acordo com o período (dia/mês/ano) ou maior incidência de determinada vaga.
+* RF12 - O sistema deve permitir a ordenação de históricos de acordo com a data de extração.
+* RF13 - O sistema deve exibir um top 5 setores com maior quantidade de vagas.
+* RF14 - O sistema deve gerar um resumo geral sobre os dados do dashboard.
 
 ## • Requisitos não funcionais
-* O sistema deve possuir interface simples e objetiva.
-* O sistema deve seguir fluxo fixo e intuitivo: Login → Excel → Resultado.
-* O sistema deve ser executado em ambiente interno da Prefeitura.
-* O sistema deve utilizar banco de dados mínimo, apenas para usuários.
-* O sistema deve processar os arquivos com rapidez suficiente para exibição imediata dos resultados na mesma tela.
-* O sistema não precisa de controle avançado de permissões, apenas autenticação de entrada.
+* RNF01 - O sistema deve possuir interface simples e objetiva.
+* RNF02 - O sistema deve seguir fluxo fixo e intuitivo: Login → Excel → Resultado.
+* RNF03 - O sistema deve ser executado em ambiente interno da Prefeitura.
+* RNF04 - O sistema não precisa de controle avançado de permissões, apenas autenticação de entrada.
+* RNF05 - O sistema deve processar os arquivos com rapidez suficiente para exibição imediata dos resultados na mesma tela.
+
+### • Histórias de usuário
+* RF02 - Como colaborador do PAT, quero fazer o upload das minhas planilhas para análise a fim de avaliar quais empresas têm maiores demandas por vagas específicas.
+* RF04 - Como colaborador do PAT, quero transformar os dados em gráficos a fim de organizar as informações de meu interesse.
+* RF07 - Como colaborador do PAT, desejo exportar resultados processados para facilitar a exibição dos mesmos.
 
 # 3. Modelo do banco de dados
 ## Modelo conceitual

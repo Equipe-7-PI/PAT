@@ -62,13 +62,23 @@ O desenvolvimento seguirá uma abordagem **incremental**, acompanhando os semest
 * RNF01 - O sistema deve possuir interface simples e objetiva.
 * RNF02 - O sistema deve seguir fluxo fixo e intuitivo: Login → Excel → Resultado.
 * RNF03 - O sistema deve ser executado em ambiente interno da Prefeitura.
-* RNF04 - O sistema não precisa de controle avançado de permissões, apenas autenticação de entrada.
-* RNF05 - O sistema deve processar os arquivos com rapidez suficiente para exibição imediata dos resultados na mesma tela.
+* RNF04 - O sistema deve processar os arquivos com rapidez suficiente para exibição imediata dos resultados na mesma tela.
 
 ### • Histórias de usuário
-* RF02 - Como colaborador do PAT, quero fazer o upload das minhas planilhas para análise a fim de avaliar quais empresas têm maiores demandas por vagas específicas.
-* RF04 - Como colaborador do PAT, quero transformar os dados em gráficos a fim de organizar as informações de meu interesse.
-* RF07 - Como colaborador do PAT, desejo exportar resultados processados para facilitar a exibição dos mesmos.
+* RF01 - Como colaborador do PAT, quero realizar login para acessar o sistema.
+* RF02 - Como colaborador do PAT, quero enviar arquivos XLSX para que seus dados possam ser analisados.
+* RF03 - Como colaborador do PAT, desejo extrair todos os dados contidos nas planilhas enviadas para permitir a análise dos mesmos.
+* RF04 - Como colaborador do PAT, gostaria de visualizar os dados em formato de gráficos para facilitar a compreensão das informações.
+* RF05 - Como colaborador do PAT, quero visualizar indicadores numéricos baseados nos dados importados das planilhas para obter uma visão geral das informações.
+* RF06 - Como colaborador do PAT, desejo aplicar filtros aos dados exibidos no dashboard para visualizar informações específicas.
+* RF07 - Como colaborador do PAT, quero ter a opção de exportar todos os dados dos dashboards para facilitar o uso dessas informações.
+* RF08 - Como colaborador do PAT, desejo que os resultados sejam exibidos na mesma tela de envio para não precisar ser redirecionado para outra página.
+* RF09 - Como administrador do PAT, quero ser o único responsável pelo cadastro de novas contas para controlar o acesso ao sistema.
+* RF10 - Como colaborador do PAT, quero que os dados extraídos sejam armazenados em um histórico no banco de dados para poder consultar informações de análises anteriores.
+* RF11 - Como colaborador do PAT, desejo filtrar os dados do histórico de acordo com o período (dia/mês/ano) ou pela maior incidência de determinada vaga para localizar informações específicas.
+* RF12 - Como colaborador do PAT, quero que os históricos sejam ordenados pela data de extração para facilitar a localização das análises realizadas.
+* RF13 - Como colaborador do PAT, desejo visualizar um top 5 dos setores com as maiores quantidades de vagas para identificar os setores com maior demanda.
+* RF14 - Como colaborador do PAT, quero visualizar um resumo geral dos dados transformados em dashboards para compreender rapidamente os principais resultados da análise.
 
 # 3. Modelo do banco de dados
 ## Modelo conceitual

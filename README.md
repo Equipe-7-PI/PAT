@@ -277,7 +277,7 @@ Recomenda-se o desenvolvimento do sistema, com foco inicial em um **MVP (produto
 
 O Modelo Canvas foi utilizado para representar, de forma visual e resumida, os principais elementos de negócio envolvidos no projeto. Ele auxilia na identificação do público-alvo, proposta de valor, canais de atendimento, relacionamento com o cliente, recursos necessários, atividades principais, parceiros envolvidos, estrutura de custos e possíveis fontes de renda.
 
-<img width="5000" height="2250" alt="modelo_negocios_canvas_prefeitura_pat" src="https://github.com/user-attachments/assets/63d33f04-bd8b-4d80-b9a3-ebc92884372b" />
+<img width="5000" height="2250" alt="modelo_negocios_canvas_prefeitura_pat" src="modelo-canvas-2.jpg" />
 
 ## 5.1 Descrição do modelo
 
